@@ -1,7 +1,5 @@
-import { createContext, useState, useMemo } from "react";
+import React from "react";
 import { createTheme } from '@mui/material/styles';
-
-const theme = createTheme();
 
 // design color tokens
 export const colorTokens = (mode) => (
@@ -128,8 +126,13 @@ export const themeSettings = (mode) => {
   
     const colors = colorTokens(mode);
   
-    return { palette: { mode: mode, ...(mode === "dark"
-          ? {
+    return { 
+      // color palette
+      palette: { mode: mode, 
+                 ...(mode === "dark"
+                 ? 
+            {
+
               // palette values for dark mode
               primary: {
                 main: colors.primary[500],
@@ -146,7 +149,8 @@ export const themeSettings = (mode) => {
                 default: colors.primary[500],
               },
             }
-          : {
+            : 
+            {
               // palette values for light mode
               primary: {
                 main: colors.primary[100],
@@ -164,6 +168,8 @@ export const themeSettings = (mode) => {
               },
             }),
       },
+
+      // typography
       typography: {
         fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
         fontSize: 12,
@@ -195,4 +201,18 @@ export const themeSettings = (mode) => {
     };
   };
 
-export default theme;
+ // context for color mode (global)
+export const globalColorContext = React.createContext( { toggleColorMode: () => {}, });
+
+export const useColorMode = () => {
+  const [colorMode, setColorMode] = React.useState("dark");
+
+  const theme = React.useMemo( () => createTheme(themeSettings(colorMode)));
+
+  // switching color state
+  const colorState = React.useMemo( () => ({
+     toggleColorMode: () => setColorMode((prev) => (prev === "light" ? "dark" : "light")),
+    }));
+
+  return [theme, colorState];
+};
