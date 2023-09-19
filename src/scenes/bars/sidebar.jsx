@@ -66,7 +66,7 @@ const SideBar = () => {
           // menuItemStyles={{}}
           style={{
             backgroundColor: colors.primary[400],
-            height: "100vh", color: colors.grey[100]
+            height: "100vh", color: colors.grey[100],
           }}
         >
 
