@@ -10,12 +10,11 @@ const DashBoard = () => {
      const theme = useTheme()
      const colors = tokens(theme.palette.mode)
 
-     const balance = useSelector((state) => state.balance.value);
+     const balance = useSelector((state) => state.data.balance);
      const dispatch = useDispatch();
 
      const handleSaveNumber = () => {
        const randomNumber = Math.floor(Math.random() * 100);
-        // Replace with your number source
        dispatch(saveBalance(randomNumber));
       };
 
