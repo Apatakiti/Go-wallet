@@ -3,9 +3,8 @@ const apiUrl = "https://api.coingecko.com/api/v3/coins/markets";
 export const fetchCryptoData = async () => {
   const params = new URLSearchParams({
     vs_currency: "usd",
-    order: "volume_desc",
-    per_page: 100,
-    page: 1,
+    order: "marketcap_desc",
+    per_page: 31, page: 1,
   });
 
   const fullUrl = `${apiUrl}?${params.toString()}`;
@@ -21,13 +20,14 @@ export const fetchCryptoData = async () => {
 
     return data.map((crypto, index) => ({
       Id: `${index + 1}`,
-      Name: {
+      Name: { 
         name: `${crypto.name}`,
         image: `${crypto.image}`,
         symbol: `${crypto.symbol}`,
       },
       Price: `$${crypto.current_price}`,
       MarketCap: `$${crypto.market_cap}`,
+      circulatingSupply : crypto.circulating_supply,
       a24hrVolume: `$${crypto.total_volume}`,
     }));
   } catch (error) {
