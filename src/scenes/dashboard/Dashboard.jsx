@@ -25,8 +25,7 @@ const DashBoard = () => {
             <Typography fontSize={"12px"} color={colors.grey[200]} >Check the latest stats of your wallet Overview</Typography>
             </Box>
         
-        <Box display={"flex"} flexDirection={"row"} >
-
+        <Box display={"flex"} flexDirection={"row"} > 
             <Box padding={"8px"} backgroundColor={colors.primary[400]} borderRadius={"10px"}
             >
                 <Header text={"Coin holding Balance" } />
@@ -37,9 +36,7 @@ const DashBoard = () => {
             </Box>
 
             <Box margin={"0 0 0 2%"} display={"flex"} flexDirection={"row"} justifyContent={"center"} flexBasis={"40%"}>
-
                 <Box  borderRadius={"10px"} padding={"8px"} backgroundColor={colors.primary[400]}>
-               
                 <Header text={"Coin holding MarketCap"} />
                     <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> BitCoin : {balance} </Typography>
                     <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Etherum : {balance} </Typography>
@@ -55,7 +52,6 @@ const DashBoard = () => {
                  <Typography variant="h5" color={"green"} fontSize={"25px"} marginLeft={"5px"} >  ${balance}
                  </Typography>
                  </Box>
-                
             </Box>
             </Box>
           
