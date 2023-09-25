@@ -126,6 +126,16 @@ const SideBar = () => {
             <Typography>Market Overview</Typography>
            </MenuItem>
           </Link>
+          
+          <Link style={{color: colors.grey[100], textDecoration: "none"}} to="/SendRecieve" > <MenuItem
+            icon={<AttachMoneyOutlinedIcon />}
+            style={styleItem5}
+            onMouseEnter={MouseEnterItem5}
+            onMouseLeave={MouseLeaveItem5}
+          >
+            <Typography>Send & Recieve</Typography>
+          </MenuItem>
+          </Link>
 
          <Link style={{color: colors.grey[100], textDecoration: "none"}} to="/Exchange" > <MenuItem
             icon={<SwapHorizOutlinedIcon />}
@@ -137,15 +147,7 @@ const SideBar = () => {
           </MenuItem>
           </Link>
 
-         <Link style={{color: colors.grey[100], textDecoration: "none"}} to="/SendRecieve" > <MenuItem
-            icon={<AttachMoneyOutlinedIcon />}
-            style={styleItem5}
-            onMouseEnter={MouseEnterItem5}
-            onMouseLeave={MouseLeaveItem5}
-          >
-            <Typography>Send & Recieve</Typography>
-          </MenuItem>
-          </Link>
+         
 
          <Link style={{color: colors.grey[100], textDecoration: "none"}} to="/Transactions" >
            <MenuItem
