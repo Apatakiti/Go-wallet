@@ -3,6 +3,7 @@ import { tokens } from "../../theme";
 import { useTheme, Box, Typography } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
+// import WebSocket from 'websocket'; 
 
 const MarketOverview = () => {
   const theme = useTheme()
@@ -31,6 +32,7 @@ const MarketOverview = () => {
     },
     { field: 'Price', headerName: 'Price', width: 120 },
     { field: 'MarketCap', headerName: 'MarketCap', width: 120 },
+    { field: 'circulatingSupply', headerName: 'circulatingSupply', width: 120 },
     { field: 'a24hrVolume', headerName: '24hrVolume', width: 120 },
   ];
   const rows = coinData
