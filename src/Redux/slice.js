@@ -20,12 +20,18 @@ const allDataSlice = createSlice({
     coinData: [],
     loading: false,
     error: null,
-    balance: localStorage.getItem("savedBalance") || 0,
+    allCoinBalance: [
+      { name: 'Bitcoin', balance: 0 },
+      { name: 'Ethereum', balance: 3 },
+    ],
   },
   reducers: {
-    saveBalance: (state, action) => {
-      state.balance = action.payload;
-      localStorage.setItem("savedBalance", action.payload);
+    updateBalance: (state, action) => {
+      const { coinName, amount } = action.payload;
+      const coin = state.allCoinBalance.find((crypto) => crypto.name === coinName);
+      if (coin) {
+        coin.balance += amount;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -46,6 +52,5 @@ const allDataSlice = createSlice({
 });
 
 // needed for external value dispatch
-export const { saveBalance } = allDataSlice.actions;
-
+export const { updateBalance } = allDataSlice.actions;
 export default allDataSlice.reducer;
