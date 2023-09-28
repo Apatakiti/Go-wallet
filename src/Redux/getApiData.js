@@ -4,7 +4,7 @@ export const fetchCryptoData = async () => {
   const params = new URLSearchParams({
     vs_currency: "usd",
     order: "marketcap_desc",
-    per_page: 31, page: 1,
+    per_page: 10, page: 1,
   });
 
   const fullUrl = `${apiUrl}?${params.toString()}`;
