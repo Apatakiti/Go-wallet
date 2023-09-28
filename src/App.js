@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { ProSidebarProvider } from "react-pro-sidebar";
 import { ThemeProvider } from '@mui/material/styles';
-import  CssBaseline   from '@mui/material/CssBaseline';
+import  CssBaseline from '@mui/material/CssBaseline';
 import SideBar from '../src/scenes/bars/sidebar';
 import Topbar from '../src/scenes/bars/TopBar';
 import { ColorModeContext, useMode } from "./theme";
