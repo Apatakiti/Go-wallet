@@ -1,30 +1,31 @@
 import React, { useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CopyAllOutlinedIcon from "@mui/icons-material/CopyAllOutlined";
 import { tokens } from "../../theme";
 import { useTheme, Box, Grid, IconButton, Button, TextField, } from "@mui/material";
 import { updateBalance } from '../../Redux/slice';
 import Header from "../../components/header";
 
-export const coinList = [
-  { name: 'Bitcoin' },
-  { name: 'Ethereum' },
-  { name: 'Ripple' },
-  { name: 'Litecoin' },
-  { name: 'Stellar' },
-  { name: 'Cardano' },
-];
+// export const coinList = [
+//   { name: 'Bitcoin' },
+//   { name: 'Ethereum' },
+//   { name: 'Ripple' },
+//   { name: 'Litecoin' },
+//   { name: 'Stellar' },
+//   { name: 'Cardano' },
+// ];
+
 
 const Recieve = () => {
+  
+  const coinData = useSelector((state) => state.data.coinData);
+  const coinList = coinData.map((crypto) => ({name: crypto.Name.name})) 
+
   const dispatch = useDispatch();
 
   const handleIncreaseBalance = (coinName, amount) => {
       dispatch(updateBalance({ coinName, amount }));
   };
-
-  // const coinData = useSelector((state) => state.data.coinData);
-  // const coinList = coinData.map((crypto) => ({name: crypto.Name.name}))
-  //setBalance,  
 
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
@@ -32,7 +33,7 @@ const Recieve = () => {
   // RECIEVE
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [VerifySelectCoin, setVerifySelectCoin] = useState(false);
-  const [CautionColor, setCautionColor] = useState(false);
+  // const [CautionColor, setCautionColor] = useState(false);
 
   const handleCoinClick = (coin) => {
       setSelectedCoin(coin.name);
@@ -100,7 +101,7 @@ const Recieve = () => {
           setAddressError(false);
           setAmountError(false);
           setVerifySelectCoin(false)
-          setCautionColor(false)
+          // setCautionColor(false)
         } 
    
      else if (isRangeValid &&  !isFloatValid && !VerifySelectCoin) {
@@ -215,6 +216,7 @@ const Recieve = () => {
                     </Button>
                   </form>
                 </Box>
+                
               </div>
             </Box>
           </Box>

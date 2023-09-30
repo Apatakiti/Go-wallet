@@ -20,10 +20,7 @@ const allDataSlice = createSlice({
     coinData: [],
     loading: false,
     error: null,
-    allCoinBalance: [
-      { name: 'Bitcoin', balance: 0 },
-      { name: 'Ethereum', balance: 3 },
-    ],
+    allCoinBalance: [],
   },
   reducers: {
     updateBalance: (state, action) => {
@@ -39,7 +36,13 @@ const allDataSlice = createSlice({
       .addCase(fetchCryptoDataAsync.fulfilled, (state, action) => {
         state.loading = false;
         state.coinData = action.payload;
-      })
+        const allCoinData = action.payload;
+        state.allCoinBalance = allCoinData.map((coin) => (
+          { 
+            coinName : coin.Name.name,
+            balance: 5 
+          })
+          )})
       .addCase(fetchCryptoDataAsync.pending, (state) => {
         state.loading = true;
         state.error = null;

@@ -1,17 +1,20 @@
-import React, { useState, } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { tokens } from "../../theme";
 import { useTheme, Box, Typography, Grid } from "@mui/material";
 import Header from "../../components/header";
 import Send from './send';
 import Recieve from './Recieve';
+// , { useState, }
 
 const SendRecieve = () => {
 
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const allCoinBalance = useSelector((state) => state.data.allCoinBalance);
+  const { allCoinBalance, loading }  = useSelector((state) => state.data);  
+  allCoinBalance.filter( coin => coin.balance > 4 )
+
 
   return (
     <Box padding={"0 2% 0 2%"}>
@@ -24,19 +27,18 @@ const SendRecieve = () => {
 
           {/* Recieve */}
           <Recieve />
-
           {/* Coin Holding Balance */}
           <Grid item style={{ width: '250px', height: '50%' }} margin={"0 0 0 2%"} borderRadius={"10px"} padding={"8px"} backgroundColor={colors.primary[400]} marginBottom={"12px"}>
             <Header text={"Coin holding Balance"} />
-            <div>
-              {allCoinBalance.map((crypto) => (
-                <div key={crypto.name}>
-                  <p>{crypto.name}: {crypto.balance}</p>
+           <div>
+            {loading ? <div>Loading...</div>  :
+              allCoinBalance.map((coin) => (
+                <div key={coin.name}>
+                  <p>{coin.coinName}: {coin.balance}</p>
                 </div>
               ))}
             </div>
           </Grid>
-
           {/* Send */}
           <Send />
         </Grid>

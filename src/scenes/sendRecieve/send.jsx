@@ -1,34 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import CopyAllOutlinedIcon from "@mui/icons-material/CopyAllOutlined";
 import { tokens } from "../../theme";
-import { useTheme, Box, Typography, Grid, IconButton, Button, TextField, } from "@mui/material";
-import { updateBalance } from '../../Redux/slice';
+import { useTheme, Box, Grid, IconButton, Button, TextField, } from "@mui/material";
+import { updateBalance }  from '../../Redux/slice';
 import Header from "../../components/header";
 
-
 const Send = () => {
-
-    const coinList = [
-    { name: 'Bitcoin' },
-    { name: 'Ethereum' },
-    { name: 'Ripple' },
-    { name: 'Litecoin' },
-    { name: 'Stellar' },
-    { name: 'Cardano' },
-  ];
   
+  const coinData = useSelector((state) => state.data.coinData);
+  const coinList = coinData.map((crypto) => ({name: crypto.Name.name})) 
   
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
+    const dispatch = useDispatch();
+
+    const handleDecreaseBalance = (coinName, amount) => {
+          dispatch(updateBalance({ coinName, amount: -amount }));
+      };
   
     // SEND  SD
-    const [selectedCoinSD, setSelectedCoinSD] = useState(null);
+    const [selectedCoinSD, setSelectedCoinSD] = useState(null);  
     const [walletAddressSD, setWalletAddressSD] = useState(null);
     const [searchValueSD, setSearchValueSD] = useState('');
-  
+    const [VerifySelectCoin, setVerifySelectCoin] = useState(false);
+
     const handleCoinClickSD = (coin) => {
       setSelectedCoinSD(coin.name);
+      setVerifySelectCoin(true)
     };
   
     const generateAddressSD = (coin) => {
@@ -44,6 +43,7 @@ const Send = () => {
       coin.name.toLowerCase().includes(searchValueSD.toLowerCase())
     );
   
+    // Copy to clip Board
     const textAreaRefSD = useRef(null);
     const [copiedSD, setCopiedSD] = useState('');
     const copyToClipboardSD = () => {
@@ -64,11 +64,9 @@ const Send = () => {
       const { name, value } = e.target;
       SendDetailsData({ ...SendDetails, [name]: value });
     };
-    const dispatch = useDispatch
+    
 
-    const handleDecreaseBalance = (coinName, amount) => {
-        dispatch(updateBalance({ coinName, amount: -amount }));
-    };
+   
   
     const handleFormSubmit = (e) => {
       e.preventDefault();
@@ -76,10 +74,11 @@ const Send = () => {
       const isRangeValid = /^[a-zA-Z0-9]{11}$/.test(SendDetails.coinAddress);
       const isFloatValid = parseFloat(SendDetails.Amount) > 0;
   
-      if (isRangeValid && isFloatValid) {
+      if (isRangeValid && isFloatValid && VerifySelectCoin) {
         handleDecreaseBalance(selectedCoinSD, parseFloat(SendDetails.Amount))
        
         const currentTransaction = {
+          CoinName: selectedCoinSD,
           coinAddress: SendDetails.coinAddress,
           Amount: parseFloat(SendDetails.Amount),
           submissionTime: new Date()
@@ -87,13 +86,16 @@ const Send = () => {
   
         setTransactionHistory([...transactionHistory, currentTransaction]);
         SendDetailsData({ coinAddress: '', Amount: '' });
-  
+        console.log(transactionHistory)
+
         setAddressError(false);
         setAmountError(false);
-  
+        setVerifySelectCoin(false)
+
       } else {
         setAddressError(!isRangeValid);
         setAmountError(!isFloatValid);
+        setVerifySelectCoin(true)
       }
     };
   
@@ -150,12 +152,14 @@ const Send = () => {
                   </Box>
   
                   <Box>
-                    {/* <Box>
-                          {you ? (
-                            <p>generate Address</p>
-                          ) : ( <p>Select a coin to get your Coin Address...</p>)}
-                          </Box> */}
+                          
                     <form onSubmit={handleFormSubmit}>
+
+                    {!VerifySelectCoin ? (
+                      <p  style={{ color: 'red'}}>kindly select a coin!</p>
+                    ) : (undefined)}
+
+
                       <TextField
                         label="Enter Coin Address"
                         variant="outlined"
@@ -179,11 +183,13 @@ const Send = () => {
                       />
                       <br />
                       <br />
-                      <Button variant="contained" color="primary" type="submit">
+                      <Button  variant="contained" color="primary" type="submit">
                         Send
                       </Button>
                     </form>
                   </Box>
+
+
                 </div>
               </Box>
             </Box>
