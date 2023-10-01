@@ -6,22 +6,11 @@ import { useTheme, Box, Grid, IconButton, Button, TextField, } from "@mui/materi
 import { updateBalance } from '../../Redux/slice';
 import Header from "../../components/header";
 
-// export const coinList = [
-//   { name: 'Bitcoin' },
-//   { name: 'Ethereum' },
-//   { name: 'Ripple' },
-//   { name: 'Litecoin' },
-//   { name: 'Stellar' },
-//   { name: 'Cardano' },
-// ];
-
-
 const Recieve = () => {
-  
+  const dispatch = useDispatch();
+
   const coinData = useSelector((state) => state.data.coinData);
   const coinList = coinData.map((crypto) => ({name: crypto.Name.name})) 
-
-  const dispatch = useDispatch();
 
   const handleIncreaseBalance = (coinName, amount) => {
       dispatch(updateBalance({ coinName, amount }));
@@ -33,7 +22,6 @@ const Recieve = () => {
   // RECIEVE
   const [selectedCoin, setSelectedCoin] = useState(null);
   const [VerifySelectCoin, setVerifySelectCoin] = useState(false);
-  // const [CautionColor, setCautionColor] = useState(false);
 
   const handleCoinClick = (coin) => {
       setSelectedCoin(coin.name);
@@ -70,7 +58,7 @@ const Recieve = () => {
   const [AddressError, setAddressError] = useState(false);
   const [AmountError, setAmountError] = useState(false);
   const [SendDetails, SendDetailsData] = useState({ coinAddress: '', Amount: '' });
-  const [transactionHistory, setTransactionHistory] = useState([]);
+  // const [transactionHistory, setTransactionHistory] = useState([]);
 
   const handleSendDetails = (e) => {
     const { name, value } = e.target;
@@ -94,31 +82,18 @@ const Recieve = () => {
             submissionTime: new Date()
           };
 
-          setTransactionHistory([...transactionHistory, currentTransaction]);
+          // setTransactionHistory([...transactionHistory, currentTransaction]);
           SendDetailsData({ coinAddress: '', Amount: '' });
-          console.log(transactionHistory)
+          console.log(currentTransaction)
+          dispatch(addCurrentTransaction(currentTransaction));
+          
+
+          // console.log(transactionHistory)
 
           setAddressError(false);
           setAmountError(false);
           setVerifySelectCoin(false)
-          // setCautionColor(false)
         } 
-   
-     else if (isRangeValid &&  !isFloatValid && !VerifySelectCoin) {
-      setAddressError(false);
-      setAmountError(true);
-      setVerifySelectCoin(true)
-    }
-    else if (!isRangeValid && isFloatValid && !VerifySelectCoin) {
-      setAddressError(true);
-      setAmountError(false);
-      setVerifySelectCoin(true)
-    }
-    else if (!isRangeValid && !isFloatValid && VerifySelectCoin) {
-      setAddressError(true);
-      setAmountError(true);
-      setVerifySelectCoin(false)
-    }
     else {
       setAddressError(isRangeValid);
       setAmountError(isFloatValid);
@@ -182,11 +157,6 @@ const Recieve = () => {
                 <Box>
 
                   <form onSubmit={handleFormSubmit}>
-
-                    {!VerifySelectCoin ? (
-                      <p  style={{ color: 'red'}}>kindly select a coin!</p>
-                    ) : (undefined)}
-
                     <TextField
                       label="Enter Coin Address"
                       variant="outlined"

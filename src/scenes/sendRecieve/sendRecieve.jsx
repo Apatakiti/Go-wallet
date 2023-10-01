@@ -5,7 +5,6 @@ import { useTheme, Box, Typography, Grid } from "@mui/material";
 import Header from "../../components/header";
 import Send from './send';
 import Recieve from './Recieve';
-// , { useState, }
 
 const SendRecieve = () => {
 
@@ -13,7 +12,7 @@ const SendRecieve = () => {
   const colors = tokens(theme.palette.mode)
 
   const { allCoinBalance, loading }  = useSelector((state) => state.data);  
-  allCoinBalance.filter( coin => coin.balance > 4 )
+  const coinHolding = allCoinBalance.filter( coin => coin.balance > 5 )
 
 
   return (
@@ -32,7 +31,7 @@ const SendRecieve = () => {
             <Header text={"Coin holding Balance"} />
            <div>
             {loading ? <div>Loading...</div>  :
-              allCoinBalance.map((coin) => (
+              coinHolding.map((coin) => (
                 <div key={coin.name}>
                   <p>{coin.coinName}: {coin.balance}</p>
                 </div>

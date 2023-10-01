@@ -58,7 +58,7 @@ const Send = () => {
     const [AddressError, setAddressError] = useState(false);
     const [AmountError, setAmountError] = useState(false);
     const [SendDetails, SendDetailsData] = useState({ coinAddress: '', Amount: '' });
-    const [transactionHistory, setTransactionHistory] = useState([]);
+    // const [transactionHistory, setTransactionHistory] = useState([]);
   
     const handleSendDetails = (e) => {
       const { name, value } = e.target;
@@ -80,13 +80,19 @@ const Send = () => {
         const currentTransaction = {
           CoinName: selectedCoinSD,
           coinAddress: SendDetails.coinAddress,
-          Amount: parseFloat(SendDetails.Amount),
+          Amount: -(parseFloat(SendDetails.Amount)),
           submissionTime: new Date()
         };
   
-        setTransactionHistory([...transactionHistory, currentTransaction]);
+        // setTransactionHistory([...transactionHistory, currentTransaction]);
         SendDetailsData({ coinAddress: '', Amount: '' });
-        console.log(transactionHistory)
+
+        console.log(currentTransaction)
+        dispatch(addCurrentTransaction(currentTransaction));
+
+        // console.log(transactionHistory)
+
+
 
         setAddressError(false);
         setAmountError(false);
