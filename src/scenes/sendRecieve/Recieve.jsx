@@ -5,6 +5,7 @@ import { tokens } from "../../theme";
 import { useTheme, Box, Grid, IconButton, Button, TextField, } from "@mui/material";
 import { updateBalance } from '../../Redux/slice';
 import Header from "../../components/header";
+import { addCurrentTransaction }  from '../../Redux/slice'
 
 const Recieve = () => {
   const dispatch = useDispatch();
@@ -79,7 +80,16 @@ const Recieve = () => {
             CoinName: selectedCoin,
             coinAddress: SendDetails.coinAddress,
             Amount: parseFloat(SendDetails.Amount),
-            submissionTime: new Date()
+            submissionTime: new Intl.DateTimeFormat('en-US',
+                         {
+                           hour: '2-digit',
+                           hour12: true, 
+                           minute: '2-digit', 
+                           day: '2-digit',
+                           month: '2-digit', 
+                           year: 'numeric'
+                        })
+                        .format(new Date())
           };
 
           // setTransactionHistory([...transactionHistory, currentTransaction]);
