@@ -14,7 +14,6 @@ const SendRecieve = () => {
   const { allCoinBalance, loading }  = useSelector((state) => state.data);  
   const coinHolding = allCoinBalance.filter( coin => coin.balance > 5 )
 
-
   return (
     <Box padding={"0 2% 0 2%"}>
       <Box margin={"0  0 4% 0"}>
@@ -26,6 +25,7 @@ const SendRecieve = () => {
 
           {/* Recieve */}
           <Recieve />
+
           {/* Coin Holding Balance */}
           <Grid item style={{ width: '250px', height: '50%' }} margin={"0 0 0 2%"} borderRadius={"10px"} padding={"8px"} backgroundColor={colors.primary[400]} marginBottom={"12px"}>
             <Header text={"Coin holding Balance"} />

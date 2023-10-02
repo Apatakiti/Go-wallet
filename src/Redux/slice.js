@@ -154,5 +154,5 @@ const allDataSlice = createSlice({
 });
 
 // needed for external value dispatch
-export const { updateBalance } = allDataSlice.actions;
+export const { updateBalance, addCurrentTransaction } = allDataSlice.actions;
 export default allDataSlice.reducer;
