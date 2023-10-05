@@ -1,2 +1,2 @@
 # Go-wallet
-A web Application which gets live data from a Binance API and uses some sorting algorithms to arrange the data for clarity, built with React.
+A web Application which allow user to send and recieve coins, check crypto Market Data, exchange coin with Real-time price from binance web-socket data and record all transactions built with React.
