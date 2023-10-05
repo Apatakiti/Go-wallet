@@ -6,9 +6,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-  const HelpSupport = () => {
+const HelpSupport = () => {
 
-    const faqData = [
+  const faqData = [
     {
       question: 'How do I create a new wallet?',
       answer: 'To create a new wallet, go to the Wallet section and click on the "Create Wallet" button.',

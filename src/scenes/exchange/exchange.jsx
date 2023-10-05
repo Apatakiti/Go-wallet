@@ -3,17 +3,17 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { tokens } from "../../theme";
 import { useTheme, Box, Grid, TextField, Typography } from "@mui/material";
-import { updateBalance } from '../../Redux/slice';
+import { updateExchangeFromBalance,  updateExchangeToBalance } from "../../Redux/slice";
 import Header from "../../components/header";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 
 const Exchange = () => {
     const theme = useTheme()
     const colors = tokens(theme.palette.mode)
-
+const dispatch = useDispatch()
     // Balance
     const { allCoinBalance, loading } = useSelector((state) => state.data);
-    const coinHolding = allCoinBalance.filter(coin => coin.balance > 5)
+    const coinHolding = allCoinBalance.filter(coin => coin.balance >= 0.001)
 
     // From
     const [VerifySelectCoin, setVerifySelectCoin] = useState(false);
@@ -68,15 +68,12 @@ const Exchange = () => {
         };
     }, []);
     
-    const dispatch = useDispatch()
-
     // Exchange
     const [AmountError, setAmountError] = useState(false);
     const [NumOfCoin, changefromAmount] = useState({ amountChangingFrom: '' });
 
     const handleSendDetails = (e) => {
         const { name, value } = e.target;
-        console.log(name, value)
         changefromAmount({ [name]: value });
     };
 
@@ -93,11 +90,10 @@ const Exchange = () => {
             const ExchangedToCoinAmount = ((parseFloat(NumOfCoin.amountChangingFrom) * fromCoinPrice) / ToCoinPrice)
 
             // Add to exchange To coin 
-            dispatch(updateBalance({ selectedCoinTo, amount: ExchangedToCoinAmount}));
-
+            dispatch(updateExchangeToBalance({ selectedCoinTo, amount: ExchangedToCoinAmount}));
+            
             // Subtract from exchange from coin
-            dispatch(updateBalance({ selectedCoinFrom, amount: -parseFloat(NumOfCoin.amountChangingFrom)}));
-
+            dispatch(updateExchangeFromBalance({ selectedCoinFrom, amount: -parseFloat(NumOfCoin.amountChangingFrom)}));
 
         } else {
             setAmountError(!isFloatValid);

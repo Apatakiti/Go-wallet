@@ -42,7 +42,7 @@ const CoinHolding = () => {
     const colors = tokens(theme.palette.mode)
   
     const { allCoinBalance, loading }  = useSelector((state) => state.data);  
-    const coinHolding = allCoinBalance.filter( coin => coin.balance > 5 )
+    const coinHolding = allCoinBalance.filter( coin => coin.balance >= 0.001 )
   
     return (
       <Box padding={"0 2% 0 2%"}>
@@ -85,19 +85,19 @@ const DashBoard = () => {
             <Box margin={"0 0 0 2%"} display={"flex"} flexDirection={"row"} justifyContent={"center"} flexBasis={"40%"}>
                 <Box  borderRadius={"10px"} padding={"8px"} backgroundColor={colors.primary[400]}>
                 <Header text={"Coin holding MarketCap"} />
-                    <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> BitCoin :  </Typography>
-                    <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Etherum :  </Typography>
+                    {/* <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> BitCoin :  </Typography>
+                    <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Etherum :  </Typography> */}
                 </Box>
             </Box>
 
             <Box margin={"0 0 0 2%"} borderRadius={"10px"} padding={"8px"} backgroundColor={colors.primary[400]}>
             <Header text={"Portfolio Net Value"} />
-                <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> BitCoin :</Typography>
-                <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Etherum : </Typography>
+                {/* <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> BitCoin :</Typography>
+                <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Etherum : </Typography> */}
                 <Box display={"flex"}>
-                    <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Total Value : </Typography> 
+                    {/* <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Total Value : </Typography> 
                  <Typography variant="h5" color={"green"} fontSize={"25px"} marginLeft={"5px"} >  $
-                 </Typography>
+                 </Typography> */}
                  </Box>
             </Box>
             </Box>
@@ -108,17 +108,17 @@ const DashBoard = () => {
 
             <Box padding={"8px"} backgroundColor={colors.primary[400]} borderRadius={"10px"} >
                 <Header text={"Portfolio pie chart stat"} />
-                <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> BitCoin :</Typography>
+                {/* <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> BitCoin :</Typography>
                 <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Etherum :</Typography>
-                <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> USDT :  </Typography>      
+                <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> USDT :  </Typography>       */}
             </Box>
 
             <Box margin={"0 0 0 2%"} display={"flex"} flexDirection={"row"} justifyContent={"center"} flexBasis={"40%"}>
 
                 <Box borderRadius={"10px"} padding={"8px"} backgroundColor={colors.primary[400]}>
                 <Header text={"Coin holding trends"} />
-                    <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Table eow 1 BitCoin : </Typography>
-                    <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}> Table row 2 Etherum :  </Typography>
+                    {/* <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}>  </Typography>
+                    <Typography variant="h5" color={colors.greenAccent[400]} fontSize={"25px"} sx={{ m: "0 0 1px 0" }}>  </Typography> */}
                 </Box>
             </Box>
 

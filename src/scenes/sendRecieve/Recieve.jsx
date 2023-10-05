@@ -5,16 +5,16 @@ import { tokens } from "../../theme";
 import { useTheme, Box, Grid, IconButton, Button, TextField, } from "@mui/material";
 import { updateBalance } from '../../Redux/slice';
 import Header from "../../components/header";
-import { addCurrentTransaction }  from '../../Redux/slice'
+import { addCurrentTransaction } from '../../Redux/slice'
 
 const Recieve = () => {
   const dispatch = useDispatch();
 
   const coinData = useSelector((state) => state.data.coinData);
-  const coinList = coinData.map((crypto) => ({name: crypto.Name.name})) 
+  const coinList = coinData.map((crypto) => ({ name: crypto.Name.name }))
 
   const handleIncreaseBalance = (coinName, amount) => {
-      dispatch(updateBalance({ coinName, amount }));
+    dispatch(updateBalance({ coinName, amount }));
   };
 
   const theme = useTheme()
@@ -25,14 +25,14 @@ const Recieve = () => {
   const [VerifySelectCoin, setVerifySelectCoin] = useState(false);
 
   const handleCoinClick = (coin) => {
-      setSelectedCoin(coin.name);
-      setVerifySelectCoin(true)
-    };
+    setSelectedCoin(coin.name);
+    setVerifySelectCoin(true)
+  };
 
   const [walletAddress, setWalletAddress] = useState(null);
   const [searchValue, setSearchValue] = useState('');
 
-   const generateWalletAddress = () => {
+  const generateWalletAddress = () => {
     const randomAddress = Math.random().toString(36).substring(2, 15);
     setWalletAddress(randomAddress);
   };
@@ -59,7 +59,6 @@ const Recieve = () => {
   const [AddressError, setAddressError] = useState(false);
   const [AmountError, setAmountError] = useState(false);
   const [SendDetails, SendDetailsData] = useState({ coinAddress: '', Amount: '' });
-  // const [transactionHistory, setTransactionHistory] = useState([]);
 
   const handleSendDetails = (e) => {
     const { name, value } = e.target;
@@ -68,48 +67,44 @@ const Recieve = () => {
 
   // on form submit 
   const handleFormSubmit = (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        const isRangeValid = /^[a-zA-Z0-9]{11}$/.test(SendDetails.coinAddress);
-        const isFloatValid = parseFloat(SendDetails.Amount) > 0;
+    const isRangeValid = /^[a-zA-Z0-9]{11}$/.test(SendDetails.coinAddress);
+    const isFloatValid = parseFloat(SendDetails.Amount) > 0;
 
-        if (isRangeValid && isFloatValid && VerifySelectCoin) {
-         handleIncreaseBalance(selectedCoin, parseFloat(SendDetails.Amount))
+    if (isRangeValid && isFloatValid && VerifySelectCoin) {
+      handleIncreaseBalance(selectedCoin, parseFloat(SendDetails.Amount))
 
-          const currentTransaction = {
-            CoinName: selectedCoin,
-            coinAddress: SendDetails.coinAddress,
-            Amount: parseFloat(SendDetails.Amount),
-            submissionTime: new Intl.DateTimeFormat('en-US',
-                         {
-                           hour: '2-digit',
-                           hour12: true, 
-                           minute: '2-digit', 
-                           day: '2-digit',
-                           month: '2-digit', 
-                           year: 'numeric'
-                        })
-                        .format(new Date())
-          };
+      const currentTransaction = {
+        CoinName: selectedCoin,
+        coinAddress: SendDetails.coinAddress,
+        Amount: parseFloat(SendDetails.Amount),
+        submissionTime: new Intl.DateTimeFormat('en-US',
+          {
+            hour: '2-digit',
+            hour12: true,
+            minute: '2-digit',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+          })
+          .format(new Date())
+      };
 
-          // setTransactionHistory([...transactionHistory, currentTransaction]);
-          SendDetailsData({ coinAddress: '', Amount: '' });
-          console.log(currentTransaction)
-          dispatch(addCurrentTransaction(currentTransaction));
-          
+      SendDetailsData({ coinAddress: '', Amount: '' });
+      console.log(currentTransaction)
+      dispatch(addCurrentTransaction(currentTransaction));
 
-          // console.log(transactionHistory)
-
-          setAddressError(false);
-          setAmountError(false);
-          setVerifySelectCoin(false)
-        } 
+      setAddressError(false);
+      setAmountError(false);
+      setVerifySelectCoin(false)
+    }
     else {
       setAddressError(isRangeValid);
       setAmountError(isFloatValid);
       setVerifySelectCoin(VerifySelectCoin)
     }
-    }
+  }
 
 
   return (
@@ -196,7 +191,7 @@ const Recieve = () => {
                     </Button>
                   </form>
                 </Box>
-                
+
               </div>
             </Box>
           </Box>

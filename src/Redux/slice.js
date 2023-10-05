@@ -133,6 +133,20 @@ const allDataSlice = createSlice({
         coin.balance += amount;
       }
     },
+    updateExchangeToBalance: (state, action) => {
+      const { selectedCoinTo, amount } = action.payload;
+      const coin = state.allCoinBalance.find((coin) => coin.coinName === selectedCoinTo);
+      if (coin) {
+        coin.balance += amount;
+      }
+    },
+    updateExchangeFromBalance: (state, action) => {
+      const { selectedCoinFrom, amount } = action.payload;
+      const coin = state.allCoinBalance.find((coin) => coin.coinName === selectedCoinFrom);
+      if (coin) {
+        coin.balance += amount;
+      }
+    },
     addCurrentTransaction: (state, action) => {
       state.transanctionHistory.push(action.payload)
     }
@@ -154,5 +168,5 @@ const allDataSlice = createSlice({
 });
 
 // needed for external value dispatch
-export const { updateBalance, addCurrentTransaction } = allDataSlice.actions;
+export const { updateBalance, addCurrentTransaction,  updateExchangeFromBalance,  updateExchangeToBalance } = allDataSlice.actions;
 export default allDataSlice.reducer;

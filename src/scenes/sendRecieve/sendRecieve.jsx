@@ -11,8 +11,8 @@ const SendRecieve = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const { allCoinBalance, loading }  = useSelector((state) => state.data);  
-  const coinHolding = allCoinBalance.filter( coin => coin.balance > 5 )
+  const { allCoinBalance, loading } = useSelector((state) => state.data);
+  const coinHolding = allCoinBalance.filter(coin => coin.balance >= 0.001)
 
   return (
     <Box padding={"0 2% 0 2%"}>
@@ -29,13 +29,13 @@ const SendRecieve = () => {
           {/* Coin Holding Balance */}
           <Grid item style={{ width: '250px', height: '50%' }} margin={"0 0 0 2%"} borderRadius={"10px"} padding={"8px"} backgroundColor={colors.primary[400]} marginBottom={"12px"}>
             <Header text={"Coin holding Balance"} />
-           <div>
-            {loading ? <div>Loading...</div>  :
-              coinHolding.map((coin) => (
-                <div key={coin.name}>
-                  <p>{coin.coinName}: {coin.balance}</p>
-                </div>
-              ))}
+            <div>
+              {loading ? <div>Loading...</div> :
+                coinHolding.map((coin) => (
+                  <div key={coin.name}>
+                    <p>{coin.coinName}: {coin.balance}</p>
+                  </div>
+                ))}
             </div>
           </Grid>
           {/* Send */}
