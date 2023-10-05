@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useTheme, Box } from "@mui/material";
+import { Box } from "@mui/material";
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
