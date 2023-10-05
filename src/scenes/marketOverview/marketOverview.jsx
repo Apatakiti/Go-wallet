@@ -1,4 +1,3 @@
-import Button from "@mui/material/Button"
 import { tokens } from "../../theme";
 import { useTheme, Box, Typography } from "@mui/material";
 import { DataGrid } from '@mui/x-data-grid';
@@ -48,8 +47,6 @@ const MarketOverview = () => {
 
   return (
     <Box padding={"8px"} backgroundColor={colors.primary[400]} borderRadius={"10px"} >
-      <Button variant="contained" color="primary">Click me market overview</Button>
-
       <Box>
         <div style={{ height: 300, width: '100%' }}>
           <DataGrid
