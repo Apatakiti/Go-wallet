@@ -2,7 +2,7 @@
 
 # Go-wallet
 
-> A web Application which allow user to send and recieve coins, check crypto Market Data, exchange coin with Real-time price from binance web-socket data and record all transactions. Built with React, Redux and MUI.
+> A web Application which allow user to send and receive coins, check crypto Market Data, exchange coin with Real-time price from binance web-socket data and record all transactions. Built with React, Redux and MUI.
 
 ![Go wallet](https://github.com/Ademola-coding/Go-wallet/assets/96092850/7dead4e6-f484-4cea-915e-dc0f4148439c)
 
