@@ -6,7 +6,7 @@
 
 A web Application which allow user to send and recieve coins, check crypto Market Data, exchange coin with Real-time price from binance web-socket data and record all transactions. Built with React, Redux and MUI.
 
-![React App 11-8-2022 1-17-35 AM](https://user-images.githubusercontent.com/96092850/200443151-a16267b5-603a-4180-9e88-286f61212fbf.png)
+![Go wallet](https://github.com/Ademola-coding/Go-wallet/assets/96092850/7dead4e6-f484-4cea-915e-dc0f4148439c)
 
 <!--! ## Video Description
 
